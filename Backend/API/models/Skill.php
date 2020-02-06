@@ -1,7 +1,7 @@
 <?php
 
 
-class Skills {
+class Skill {
 
     //db config
     private $conn;
