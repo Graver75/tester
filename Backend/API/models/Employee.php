@@ -5,9 +5,8 @@ class Employee {
 
     // db config
     private $conn;
-    private $table_name = 'employees';
 
-    public $id;
+    public $employee_id;
     public $first_name;
     public $last_name;
     public $age;
@@ -42,6 +41,16 @@ class Employee {
 
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
+
+        return $stmt;
+    }
+
+    function create() {
+        $query = 'INSERT INTO employees (first_name, last_name, age, exp) VALUES (?, ?, ?, ?)';
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute([$this->first_name, $this->last_name, $this->age, $this->exp]);
+        $this->employee_id = $this->conn->lastInsertId();
 
         return $stmt;
     }
