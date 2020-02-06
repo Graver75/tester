@@ -23,4 +23,11 @@ class Skills {
         return $stmt;
     }
 
+    function update() {
+        $query = 'UPDATE skills SET skill = ' . $this->skill . 'WHERE skill_id = ' . $this->skill_id;
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+    }
+
 }
