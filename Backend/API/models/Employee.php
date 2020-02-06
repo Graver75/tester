@@ -37,8 +37,8 @@ class Employee {
                   FROM emps_skls
                   JOIN employees USING (employee_id)
                   JOIN skills USING (skill_id)
-                  GROUP BY first_name, last_name, age, exp
-                  WHERE ' . $field . ' = ' .$value;
+                  WHERE ' . $field . ' = ' . $value .
+                ' GROUP BY first_name, last_name, age, exp';
 
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
