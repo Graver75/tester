@@ -13,6 +13,16 @@ class Skills {
         $this->conn = $db;
     }
 
+    function query() {
+        $query = 'SELECT * FROM skills';
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $this->skill_id = $this->conn->lastInsertId();
+
+        return $stmt;
+    }
+
     function create() {
         $query = 'INSERT INTO skills (skill) VALUES (?)';
 
