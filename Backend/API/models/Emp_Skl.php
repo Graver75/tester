@@ -1,7 +1,7 @@
 <?php
 
 
-class Emps_Skls {
+class EmpSkl {
 
     private $conn;
 
