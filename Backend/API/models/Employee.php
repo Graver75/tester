@@ -17,4 +17,16 @@ class Employee {
         $this->conn = $db;
     }
 
+    // all with skills
+    function read() {
+        $query = 'SELECT * FROM emps_skls
+                  JOIN employees USING (employee_id)
+                  JOIN skills USING (skill_id)';
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+
+        return $stmt;
+    }
+
 }
