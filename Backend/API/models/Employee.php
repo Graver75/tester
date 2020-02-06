@@ -13,15 +13,17 @@ class Employee {
     public $age;
     public $exp;
 
-    public function __construct($db) {
+    public function __construct(PDO $db) {
         $this->conn = $db;
     }
 
     // all
     function query() {
-        $query = 'SELECT * FROM emps_skls
+        $query = 'SELECT first_name, last_name, age, exp, GROUP_CONCAT(skill SEPARATOR ", ") AS skills
+                  FROM emps_skls
                   JOIN employees USING (employee_id)
-                  JOIN skills USING (skill_id)';
+                  JOIN skills USING (skill_id)
+                  GROUP BY first_name, last_name, age, exp';
 
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
@@ -31,9 +33,11 @@ class Employee {
 
     // by field
     function query_by_field($field, $value) {
-        $query = 'SELECT * FROM emps_skls
+        $query = 'SELECT first_name, last_name, age, exp, GROUP_CONCAT(skill SEPARATOR ", ") AS skills
+                  FROM emps_skls
                   JOIN employees USING (employee_id)
                   JOIN skills USING (skill_id)
+                  GROUP BY first_name, last_name, age, exp
                   WHERE ' . $field . ' = ' .$value;
 
         $stmt = $this->conn->prepare($query);
