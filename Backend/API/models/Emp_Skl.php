@@ -13,10 +13,12 @@ class EmpSkl {
     }
 
     function create() {
-        $query = 'INSERT INTO emps_skls (emplyees_id, skill_id) VALUES (?, ?)';
+        $query = 'INSERT INTO emps_skls (employee_id, skill_id) VALUES (?, ?)';
 
         $stmt = $this->conn->prepare($query);
         $stmt->execute([$this->employee_id, $this->skill_id]);
+
+        return $stmt;
     }
 
 }
